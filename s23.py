@@ -29,12 +29,10 @@ df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag'
 
 df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
-st.dataframe(df)
 
+see_data = st.expander('Ganzer Datensatz')
+with see_data:
+    st.dataframe(df)
 
-cats = list(df["Kategorie"].unique)
-st.write(list(cats))
-cat_selection = st.multiselect("Ausgaben Kategorie", options = cats)
-st.bar_chart(cats[cat_selection])
 
 st.write("Itsch libbe ditsch 🧡")
