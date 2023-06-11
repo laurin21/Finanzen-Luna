@@ -105,6 +105,10 @@ st.line_chart(df_budget[["Betrag", "Tagesbudget"]])
 
 st.markdown("---")
 
+st.write(f"Gesamtausgaben {df['Betrag'].sum()}")
+
+st.markdown("---")
+
 see_data = st.expander('Ganzer Datensatz')
 with see_data:
     
