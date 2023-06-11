@@ -16,4 +16,4 @@ df = load_data(st.secrets["public_gsheets_url"])
 
 # Print results.
 for row in df.itertuples():
-    st.write(f"{row.Datum} has a :{row.Betrag}:")
+    st.write(row)
