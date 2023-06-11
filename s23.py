@@ -37,12 +37,13 @@ st.title("Finanzen Interrail")
 
 cats = df["Kategorie"].unique()
 
-betrag_per_cat = df.groupby("Kategorie")["Betrag"].sum()
+sum_cats = df.groupby("Kategorie")["Betrag"].sum()
+sum_dates = df.groupby("Datum")["Betrag"].sum()
 
-
-st.dataframe(betrag_per_cat)
-
-st.bar_chart(betrag_per_cat)
+st.dataframe(sum_dates)
+st.bar_chart(sum_dates)
+st.dataframe(sum_cats)
+st.bar_chart(sum_cats)
 
 see_data = st.expander('Ganzer Datensatz')
 with see_data:
