@@ -38,8 +38,9 @@ diff_list = [0] * days
 
 df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag', 'Split'])
 
-df_split = df[df["Split"] == "1"]
-df = df[df["Split"] != "1"]
+df["Split"] = df["Split"].astype('int')
+df_split = df[df["Split"] == 1]
+df = df[df["Split"] != 1]
 
 splitted = round(df_split["Betrag"].sum() / days, 2)
 
