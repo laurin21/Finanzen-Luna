@@ -10,7 +10,7 @@ st.title("Finanzen Interrail")
 @st.cache_data(ttl=600)
 def load_data(sheets_url):
     csv_url = sheets_url.replace("/edit#gid=", "/export?format=csv&gid=")
-    return pd.read_csv(csv_url, error_bad_lines=False)
+    return pd.read_csv(csv_url, sep='delimiter')
 
 df = load_data(st.secrets["public_gsheets_url"])
 
