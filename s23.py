@@ -36,14 +36,13 @@ df["Betrag"] = df["Betrag"].astype('float')
 st.title("Finanzen Interrail")
 
 cats = df["Kategorie"].unique()
-cat_sums = pd.DataFrame(cats)
 
-summe = sum(df[df["Kategorie"] == categorie]["Betrag"])
-cat_sums[categorie] = summe
+betrag_per_cat = df.groupby("Kategorie")["Betrag"].sum()
 
-st.dataframe(cat_sums)
 
-st.bar_chart(cat_sums, x = cat_sums.index ,y = cat_sums[categorie])
+st.dataframe(betrag_per_cat)
+
+st.bar_chart(betrag_per_cat)
 
 see_data = st.expander('Ganzer Datensatz')
 with see_data:
