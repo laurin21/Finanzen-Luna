@@ -66,17 +66,11 @@ df_budget["Gesamtbetrag"] = [0] * days
 df_budget["Moving Budget"] = [0] * days 
 df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
-st.dataframe(sum_dates)
-
-st.write("TEST")
 
 for date in range(len(days_list)):
     for i in range(len(sum_dates)):
         if datetime.strptime(days_list[date], '%d.%m.%Y') == sum_dates["Datum"][i]:
             sum_list[date] += sum_dates["Betrag"][i]
-            st.write(sum_dates["Betrag"][i])
-
-st.write("TEST END")
 
 df_budget["Betrag"] = sum_list
 
@@ -87,23 +81,23 @@ df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum()
 
 df_budget["Moving Diff"] = df_budget["Moving Budget"] - df_budget["Gesamtbetrag"]
 
-
-
-st.dataframe(df_budget)
-
-
-
-
-
-
 #####
 
 st.title("Finanzen Interrail")
+
+st.markdown("### Ausgaben pro Tag")
+st.dataframe(sum_dates)
+
+st.markdown("### Budgetübersicht")
+st.dataframe(df_budget)
+
 
 st.dataframe(sum_dates)
 st.bar_chart(sum_dates["Betrag"])
 st.dataframe(sum_cats)
 st.bar_chart(sum_cats)
+
+st.line_chart(df_budget[["Gesamtbetrag", "Moving Budget"]])
 
 see_data = st.expander('Ganzer Datensatz')
 with see_data:
