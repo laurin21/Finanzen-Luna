@@ -65,15 +65,16 @@ df_budget["Betrag"] = sum_list
 df_budget["Tagesbudget"] = budget_list
 df_budget["Diff"] = diff_list
 df_budget["Gesamtbetrag"] = total_sum_list
-df_budget["Floating Budget"] = moving_budget_list
+df_budget["Moving Budget"] = moving_budget_list
 df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
+
 
 for date in range(len(days_list)):
     for i in range(len(sum_dates)):
         if date == i:
             sum_list[date] += sum_dates[i]
 
-df_budget["Floating Budget"] = df_budget['Betrag'].cumsum()
+df_budget["Gesamtbetrag"] = df_budget['Betrag'].cumsum()
 
 st.dataframe(df_budget)
 
