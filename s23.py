@@ -32,8 +32,8 @@ df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce"
 st.dataframe(df)
 
 
-categories = df["Kategorie"].unique
-cat_selection = st.multiselect("Ausgaben Kategorie", options = categories, default = list(categories.sort()))
-st.bar_chart(categories[cat_selection])
+cats = df["Kategorie"].unique
+cat_selection = st.multiselect("Ausgaben Kategorie", options = cats, default = list(cats.sort()))
+st.bar_chart(cats[cat_selection])
 
 st.write("Itsch libbe ditsch 🧡")
