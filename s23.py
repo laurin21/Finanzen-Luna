@@ -29,10 +29,17 @@ df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag'
 
 df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
+#####
+
+st.title("Finanzen Interrail")
+
+st.write(df["Kategorie"])
+st.write(df["Kategorie"].unique())
 
 see_data = st.expander('Ganzer Datensatz')
 with see_data:
     st.dataframe(df)
 
+st.markdown("---")
 
 st.write("Itsch libbe ditsch 🧡")
