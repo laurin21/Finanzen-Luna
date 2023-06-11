@@ -69,7 +69,7 @@ df_budget["Floating Budget"] = moving_budget_list
 df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
 
-df_budget["Floating Budget"] = df['df_budget'].cumsum()
+df_budget["Floating Budget"] = df_budget['Betrag'].cumsum()
 
 st.dataframe(df_budget)
 
