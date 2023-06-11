@@ -32,7 +32,7 @@ df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce"
 st.dataframe(df)
 
 
-cats = df["Kategorie"].unique
+cats = list(df["Kategorie"].unique)
 st.write(list(cats))
 cat_selection = st.multiselect("Ausgaben Kategorie", options = cats)
 st.bar_chart(cats[cat_selection])
