@@ -42,6 +42,8 @@ for categorie in cats:
     summe = sum(df[df["Kategorie"] == categorie]["Betrag"])
     cat_sums[categorie] = summe
 
+st.dataframe(cat_sums)
+
 st.bar_chart(cat_sums)
 
 see_data = st.expander('Ganzer Datensatz')
