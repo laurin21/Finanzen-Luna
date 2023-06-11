@@ -26,4 +26,4 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 # Print results.
 
-st.write(type(rows))
+st.write(f"{type(rows)}")
