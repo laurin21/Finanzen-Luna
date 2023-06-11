@@ -64,7 +64,7 @@ df_budget["Tagesbudget"] = [daily_budget] * days
 df_budget["Diff"] = [0] * days 
 df_budget["Ausgaben Gesamt"] = [0] * days 
 df_budget["Moving Budget"] = [0] * days 
-df_budget["Datum"] = datetime.date(pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")) #### Sekunden entfernen
+df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce") #### Sekunden entfernen
 
 
 for date in range(len(days_list)):
