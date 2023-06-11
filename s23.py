@@ -38,6 +38,7 @@ diff_list = [0] * days
 
 df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag', 'Split'])
 
+df["Split"].fillna(0, inplace=True)
 df["Split"] = df["Split"].astype('int')
 df_split = df[df["Split"] == 1]
 df = df[df["Split"] != 1]
