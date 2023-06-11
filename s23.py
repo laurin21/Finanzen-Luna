@@ -104,7 +104,7 @@ st.markdown("---")
 
 st.line_chart(df_budget[["Gesamtbetrag", "Moving Diff"]])
 
-st.line_chart(df_budget[["Tagesbudget", "Tagebudget"]])
+st.line_chart(df_budget[["Betrag", "Tagesbudget"]])
 
 st.markdown("---")
 
