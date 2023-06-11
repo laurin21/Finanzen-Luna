@@ -27,4 +27,6 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag'])
 # Print results.
 
+df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce")
+
 st.dataframe(df)
