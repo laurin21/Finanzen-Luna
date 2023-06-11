@@ -38,9 +38,8 @@ st.title("Finanzen Interrail")
 cats = df["Kategorie"].unique()
 cat_sums = pd.DataFrame(cats)
 
-for categorie in cats:
-    summe = sum(df[df["Kategorie"] == categorie]["Betrag"])
-    cat_sums[categorie] = summe
+summe = sum(df[df["Kategorie"] == categorie]["Betrag"])
+cat_sums[categorie] = summe
 
 st.dataframe(cat_sums)
 
