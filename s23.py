@@ -24,12 +24,33 @@ def run_query(query):
 
 sheet_url = st.secrets["private_gsheets_url"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
-df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag'])
-# Print results.
+
+
+days = 31
+total_budget = 3000
+daily_budget = total_budget / days
+
+days_list = ["18.07.2023", "19.07.2023", "20.07.2023", "21.07.2023", "22.07.2023", "23.07.2023", "24.07.2023", "25.07.2023", "26.07.2023", "27.07.2023", "28.07.2023", "29.07.2023", "30.07.2023", "31.07.2023", "01.08.2023", "02.08.2023", "03.08.2023", "04.08.2023", "05.08.2023", "06.08.2023", "07.08.2023", "08.08.2023", "09.08.2023", "10.08.2023", "11.08.2023", "12.08.2023", "13.08.2023", "14.08.2023", "15.08.2023", "16.08.2023", "17.08.2023"]
+sum_list = [0] * days 
+budget_list = [daily_budget] * days
+diff_list = [0] * days 
+
+
+df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag', 'Split'])
+
+df_split = df[df["Split"] == 1]
+df = df[df["Split" != 1]]
+
+splitted = round(df_split["Betrag"].sum() / days, 2)
 
 df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce")
 df["Betrag"] = df["Betrag"].str.replace(",",".")
 df["Betrag"] = df["Betrag"].astype('float')
+
+df_budget = pd.DataFrame(columns =['Datum', 'Betrag', 'Budget', 'Diff'])
+df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
+
+st.dataframe(df_budget)
 
 #####
 
