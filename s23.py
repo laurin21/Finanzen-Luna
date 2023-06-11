@@ -72,7 +72,7 @@ st.write("TEST")
 
 for date in range(len(days_list)):
     for i in range(len(sum_dates)):
-        if datetime.strptime(days_list[date], '%Y-%m-%d') == sum_dates["Datum"][i]:
+        if datetime.strptime(days_list[date], '%d.%m.%Y') == sum_dates["Datum"][i]:
             sum_list[date] += sum_dates["Betrag"][i]
             st.write(sum_dates["Betrag"][i])
 
