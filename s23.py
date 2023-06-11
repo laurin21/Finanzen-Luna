@@ -4,7 +4,7 @@ import streamlit as st
 from google.oauth2 import service_account
 from gsheetsdb import connect
 import pandas as pd
-from datetime import datetime
+import datetime
 
 # Create a connection object.
 credentials = service_account.Credentials.from_service_account_info(
@@ -64,12 +64,12 @@ df_budget["Tagesbudget"] = [daily_budget] * days
 df_budget["Diff"] = [0] * days 
 df_budget["Ausgaben Gesamt"] = [0] * days 
 df_budget["Moving Budget"] = [0] * days 
-df_budget["Datum"] = dt.date(pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")) #### Sekunden entfernen
+df_budget["Datum"] = datetime.date(pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")) #### Sekunden entfernen
 
 
 for date in range(len(days_list)):
     for i in range(len(sum_dates)):
-        if datetime.strptime(days_list[date], '%d.%m.%Y') == sum_dates["Datum"][i]:
+        if datetime.datetime.strptime(days_list[date], '%d.%m.%Y') == sum_dates["Datum"][i]:
             sum_list[date] += sum_dates["Ausgaben"][i]
 
 df_budget["Ausgaben"] = sum_list
