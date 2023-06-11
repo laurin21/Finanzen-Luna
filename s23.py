@@ -34,7 +34,7 @@ days_list = ["18.07.2023", "19.07.2023", "20.07.2023", "21.07.2023", "22.07.2023
 sum_list = [0] * days 
 budget_list = [daily_budget] * days
 diff_list = [0] * days 
-
+floating_budget_list = [0] * days 
 
 df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag', 'Split'])
 
@@ -49,7 +49,7 @@ df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce"
 df["Betrag"] = df["Betrag"].str.replace(",",".")
 df["Betrag"] = df["Betrag"].astype('float')
 
-df_budget = pd.DataFrame(columns =['Datum', 'Betrag', 'Budget', 'Diff'])
+df_budget = pd.DataFrame([days_list, sum_list, budget_list, diff_list, floating_budget_list],columns =['Datum', 'Betrag', 'Tagesbudget', 'Diff', "Floating Budget"])
 df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
 st.dataframe(df_budget)
