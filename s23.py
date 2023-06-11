@@ -105,7 +105,7 @@ st.markdown("---")
 st.markdown("### Gesamtbetrag vs. Moving Budgetdifferenz")
 st.line_chart(df_budget[["Gesamtbetrag", "Moving Diff"]])
 
-st.markdown("### Tagesausgaben vs. Tagesbudget")
+st.markdown("### Betrag vs. Budget (pro Tag)")
 st.line_chart(df_budget[["Betrag", "Tagesbudget"]])
 
 st.markdown("---")
