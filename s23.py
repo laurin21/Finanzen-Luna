@@ -94,7 +94,7 @@ st.dataframe(df_budget)
 st.title("Finanzen Interrail")
 
 st.dataframe(sum_dates)
-st.bar_chart(sum_dates)
+st.bar_chart(sum_dates["Betrag"])
 st.dataframe(sum_cats)
 st.bar_chart(sum_cats)
 
