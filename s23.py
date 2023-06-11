@@ -34,7 +34,7 @@ df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce"
 st.title("Finanzen Interrail")
 
 cats = df["Kategorie"].unique()
-cat_sums = dict(cats)
+cat_sums = pd.DataFrame(cats)
 
 for categorie in cats:
     summe = sum(df["Betrag"][df["Kategorie"] == categorie])
