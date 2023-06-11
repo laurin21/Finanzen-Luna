@@ -85,11 +85,6 @@ df_budget["Moving Diff"] = df_budget["Moving Budget"] - df_budget["Gesamtbetrag"
 
 st.title("Finanzen Interrail")
 
-st.markdown("### Budgetübersicht")
-st.dataframe(df_budget)
-
-st.markdown("---")
-
 st.markdown("### Ausgaben pro Tag")
 st.dataframe(sum_dates)
 st.bar_chart(sum_dates["Betrag"])
@@ -112,7 +107,14 @@ st.markdown("---")
 
 see_data = st.expander('Ganzer Datensatz')
 with see_data:
+    
+    st.markdown("### Budgetübersicht")
+    st.dataframe(df_budget)
+    st.markdown("---")
+
+    st.markdown("### Originaldaten")    
     st.dataframe(df)
+    st.markdown("---")
 
 st.markdown("---")
 
