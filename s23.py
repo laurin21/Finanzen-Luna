@@ -35,15 +35,15 @@ df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag'
 
 df["Split"].fillna(0, inplace=True)
 df["Split"] = df["Split"].astype('int')
-df_split = df[df["Split"] == 1]
-df = df[df["Split"] != 1]
-
-splitted = round(float(df_split["Betrag"].sum()) / days, 2)
 
 df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce")
 df["Betrag"] = df["Betrag"].str.replace(",",".")
 df["Betrag"] = df["Betrag"].astype('float')
 
+df_split = df[df["Split"] == 1]
+df = df[df["Split"] != 1]
+
+splitted = round(float(df_split["Betrag"].sum()) / days, 2)
 
 
 
