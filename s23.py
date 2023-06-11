@@ -4,6 +4,7 @@ import streamlit as st
 from google.oauth2 import service_account
 from gsheetsdb import connect
 import pandas as pd
+from datetime import datetime
 
 # Create a connection object.
 credentials = service_account.Credentials.from_service_account_info(
@@ -63,7 +64,7 @@ df_budget["Tagesbudget"] = [daily_budget] * days
 df_budget["Diff"] = [0] * days 
 df_budget["Gesamtbetrag"] = [0] * days 
 df_budget["Moving Budget"] = [0] * days 
-
+df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
 st.dataframe(sum_dates)
 
@@ -71,10 +72,9 @@ st.write("TEST")
 
 for date in range(len(days_list)):
     for i in range(len(sum_dates)):
-        if days_list[date] == sum_dates["Datum"][i]:
+        if datetime.strptime(days_list[date], '%Y-%m-%d') == sum_dates["Datum"][i]:
             sum_list[date] += sum_dates["Betrag"][i]
             st.write(sum_dates["Betrag"][i])
-df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
 st.write("TEST END")
 
