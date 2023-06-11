@@ -33,8 +33,14 @@ df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce"
 
 st.title("Finanzen Interrail")
 
-st.write(df["Kategorie"])
-st.write(df["Kategorie"].unique())
+cats = df["Kategorie"].unique()
+cat_sums = dict(cats)
+
+for categorie in cats:
+    summe = sum(df[df["Kategorie"] == categorie])
+    cat_sums[categorie] = summe
+
+st.bar_chart(cat_sums)
 
 see_data = st.expander('Ganzer Datensatz')
 with see_data:
