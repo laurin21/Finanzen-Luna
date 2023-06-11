@@ -6,7 +6,7 @@ import time
 import gspread
 
 st.set_page_config(
-    page_title="Life 2.1",
+    page_title="Finanzen Luna",
     page_icon="",
     menu_items={}
 )
