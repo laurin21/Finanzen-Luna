@@ -43,7 +43,7 @@ df["Split"] = df["Split"].astype('int')
 df_split = df[df["Split"] == 1]
 df = df[df["Split"] != 1]
 
-splitted = round((df_split["Betrag"].sum()) / days, 2)
+splitted = round(float(df_split["Betrag"].sum()) / days, 2)
 
 df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce")
 df["Betrag"] = df["Betrag"].str.replace(",",".")
