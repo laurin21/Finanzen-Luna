@@ -49,7 +49,7 @@ df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce"
 df["Betrag"] = df["Betrag"].str.replace(",",".")
 df["Betrag"] = df["Betrag"].astype('float')
 
-df_budget = pd.DataFrame([days_list, sum_list, budget_list, diff_list, floating_budget_list],columns =['Datum', 'Betrag', 'Tagesbudget', 'Diff', "Floating Budget"])
+df_budget = pd.DataFrame([[days_list, sum_list, budget_list, diff_list, floating_budget_list]],columns =['Datum', 'Betrag', 'Tagesbudget', 'Diff', "Floating Budget"])
 df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
 st.dataframe(df_budget)
