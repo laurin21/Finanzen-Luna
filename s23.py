@@ -96,11 +96,15 @@ st.bar_chart(sum_dates["Betrag"])
 
 st.markdown("---")
 
-st.markdown("### Ausgaben pro Tag")
+st.markdown("### Ausgaben pro Kategorie")
 st.dataframe(sum_cats)
 st.bar_chart(sum_cats)
 
-st.line_chart(df_budget[["Gesamtbetrag", "Moving Budget"]])
+st.markdown("---")
+
+st.line_chart(df_budget[["Gesamtbetrag", "Moving Diff"]])
+
+st.line_chart(df_budget[["Tagesbudget", "Moving Budget"]])
 
 see_data = st.expander('Ganzer Datensatz')
 with see_data:
