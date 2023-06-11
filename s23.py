@@ -77,7 +77,7 @@ df_budget["Ausgaben"] = sum_list
 df_budget["Diff"] = df_budget["Tagesbudget"] - df_budget["Ausgaben"]
 
 df_budget["Ausgaben Gesamt"] = df_budget['Ausgaben'].cumsum()
-df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum()
+df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum() ### FALSCH Muss Moving Diff vom Vortag plus Tagesbudget des aktuellen Tags sein
 
 df_budget["Moving Diff"] = df_budget["Moving Budget"] - df_budget["Ausgaben Gesamt"]
 
@@ -109,14 +109,14 @@ st.write(f"Gesamtausgaben {df['Ausgaben'].sum()}")
 
 st.markdown("---")
 
-see_data = st.expander('Ganzer Datensatz')
+see_data = st.expander('Weitere Infos')
 with see_data:
     
     st.markdown("### Budgetübersicht")
     st.dataframe(df_budget)
     st.markdown("---")
 
-    st.markdown("### Originaldaten")    
+    st.markdown("### Rohdaten")    
     st.dataframe(df)
     st.markdown("---")
 
