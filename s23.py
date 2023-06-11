@@ -33,8 +33,7 @@ st.dataframe(df)
 
 
 cats = df["Kategorie"].unique
-sorted_cats = list(cats).sort()
-cat_selection = st.multiselect("Ausgaben Kategorie", options = cats, default = sorted_cats)
+cat_selection = st.multiselect("Ausgaben Kategorie", options = cats)
 st.bar_chart(cats[cat_selection])
 
 st.write("Itsch libbe ditsch 🧡")
