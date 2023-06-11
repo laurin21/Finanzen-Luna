@@ -3,6 +3,8 @@
 import pandas as pd
 import streamlit as st
 
+st.title("Finanzen Interrail")
+
 # Read in data from the Google Sheet.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
 @st.cache_data(ttl=600)
