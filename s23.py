@@ -68,10 +68,15 @@ df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", err
 
 st.dataframe(sum_dates)
 
+st.write("TEST")
+
 for date in range(len(days_list)):
     for i in range(len(sum_dates)):
         if days_list[date] == sum_dates["Datum"][i]:
+            st.write(sum_dates["Betrag"][i])
             sum_list[date] += sum_dates["Betrag"][i]
+
+st.write("TEST END")
 df_budget["Betrag"] = sum_list
 
 df_budget["Diff"] = df_budget["Tagesbudget"] - df_budget["Betrag"]
