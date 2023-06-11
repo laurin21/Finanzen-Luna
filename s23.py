@@ -17,26 +17,20 @@ finanzen, wochenstunden, investment = st.tabs(["Finanzen", "Wochenstunden", "Inv
 
 with finanzen:
 	##### TITEL #####
-	st.title("Finanzen")
+	st.title("Finanzen Interrail")
 
 	#### DATA IMPORT ####
 	sa = gspread.service_account("service_account.json")
-	sh = sa.open("finanzen")
+	sh = sa.open("Finanzen_Interrail")
 	aus = sh.worksheet("Ausgaben")
 	aus = pd.DataFrame(aus.get_all_records())
-	ein = sh.worksheet("Ausgaben")
-	ein = pd.DataFrame(ein.get_all_records())
 
 	aus["Betrag"] = aus["Betrag"].div(100)
-	ein["Betrag"] = ein["Betrag"].div(100)
 
 	aus["Datum"] = pd.to_datetime(aus["Datum"], format = "%d.%m.%Y", errors = "coerce")
-	ein["Datum"] = pd.to_datetime(ein["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
 	aus_months = aus.groupby(aus.Datum.dt.month)["Betrag"].sum()
 	aus_cat = aus.groupby("Kategorie")["Betrag"].sum()
-	ein_months = aus.groupby(aus.Datum.dt.month)["Betrag"].sum()
-	ein_cat = ein.groupby("Kategorie")["Betrag"].sum()
 
 	#### ÜBERSICHT #####
 	st.subheader("Übersicht")
@@ -45,8 +39,6 @@ with finanzen:
 	aus_tab, ein_tab = st.tabs(["Ausgaben", "Einnahmen"])
 	with aus_tab:
 		st.line_chart(aus_months[period[0]:period[1]])
-	with ein_tab:
-		st.line_chart(ein_months[period[0]:period[1]])
 
 	st.write("")
 	st.markdown("---")
