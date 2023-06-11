@@ -74,7 +74,7 @@ for date in range(len(days_list)):
         if date == i:
             sum_list[date] += sum_dates[i]
 
-df_budget["Tagesbudget"] = df["Tagesbudget"] - df["Betrag"]
+df_budget["Tagesbudget"] = df_budget["Tagesbudget"] - df_budget["Betrag"]
 
 df_budget["Gesamtbetrag"] = df_budget['Betrag'].cumsum()
 
