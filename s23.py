@@ -65,6 +65,8 @@ df_budget["Moving Budget"] = [0] * days
 df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
 
+st.dataframe(sum_dates)
+
 for date in range(len(days_list)):
     for i in range(len(sum_dates)):
         if days_list[date] == sum_dates["Datum"][i]:
