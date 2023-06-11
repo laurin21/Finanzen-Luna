@@ -44,7 +44,7 @@ for categorie in cats:
 
 st.dataframe(cat_sums)
 
-st.bar_chart(cat_sums)
+st.bar_chart(cat_sums, x = cat_sums.index ,y = cat_sums[categorie])
 
 see_data = st.expander('Ganzer Datensatz')
 with see_data:
