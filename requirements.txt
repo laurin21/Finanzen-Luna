@@ -1,0 +1,10 @@
+streamlit
+pandas
+datetime
+numpy
+gspread
+PyOpenSSL
+oauth2client
+matplotlib
+seaborn
+yfinance
