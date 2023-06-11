@@ -37,7 +37,7 @@ cats = df["Kategorie"].unique()
 cat_sums = pd.DataFrame(cats)
 
 for categorie in cats:
-    summe = sum(df["Betrag"][df["Kategorie"] == categorie])
+    summe = sum(df[df["Kategorie"] == categorie])
     cat_sums[categorie] = summe
 
 st.bar_chart(cat_sums)
