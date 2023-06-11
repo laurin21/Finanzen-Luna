@@ -53,19 +53,14 @@ sum_cats = df.groupby("Kategorie")["Betrag"].sum()
 sum_dates = df.groupby("Datum")["Betrag"].sum()
 
 days_list = ["18.07.2023", "19.07.2023", "20.07.2023", "21.07.2023", "22.07.2023", "23.07.2023", "24.07.2023", "25.07.2023", "26.07.2023", "27.07.2023", "28.07.2023", "29.07.2023", "30.07.2023", "31.07.2023", "01.08.2023", "02.08.2023", "03.08.2023", "04.08.2023", "05.08.2023", "06.08.2023", "07.08.2023", "08.08.2023", "09.08.2023", "10.08.2023", "11.08.2023", "12.08.2023", "13.08.2023", "14.08.2023", "15.08.2023", "16.08.2023", "17.08.2023"]
-sum_list = [splitted] * days 
-budget_list = [daily_budget] * days
-total_sum_list = [0] * days 
-diff_list = [0] * days 
-moving_budget_list = [0] * days 
 
-df_budget = pd.DataFrame(columns =['Datum', 'Betrag', 'Tagesbudget', 'Diff', "Gesamtbetrag",  "Moving Budget"])
+df_budget = pd.DataFrame(columns =['Datum', 'Betrag', 'Tagesbudget', 'Diff', "Gesamtbetrag",  "Moving Budget", "Moving Diff"])
 df_budget["Datum"] = days_list
-df_budget["Betrag"] = sum_list
-df_budget["Tagesbudget"] = budget_list
-df_budget["Diff"] = diff_list
-df_budget["Gesamtbetrag"] = total_sum_list
-df_budget["Moving Budget"] = moving_budget_list
+df_budget["Betrag"] = [splitted] * days 
+df_budget["Tagesbudget"] = [daily_budget] * days
+df_budget["Diff"] = [0] * days 
+df_budget["Gesamtbetrag"] = [0] * days 
+df_budget["Moving Budget"] = [0] * days 
 df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
 
@@ -77,6 +72,10 @@ for date in range(len(days_list)):
 df_budget["Diff"] = df_budget["Tagesbudget"] - df_budget["Betrag"]
 
 df_budget["Gesamtbetrag"] = df_budget['Betrag'].cumsum()
+df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum()
+
+df_budget["Moving Diff"] = df_budget["Moving Budget"] - df_budget["Gesamtbetrag"]
+
 
 st.dataframe(df_budget)
 
