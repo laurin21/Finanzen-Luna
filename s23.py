@@ -71,7 +71,7 @@ st.dataframe(sum_dates)
 for date in range(len(days_list)):
     for i in range(len(sum_dates)):
         if days_list[date] == sum_dates["Datum"][i]:
-            sum_list[date] += sum_dates[i]
+            sum_list[date] += sum_dates["Betrag"][i]
 df_budget["Betrag"] = sum_list
 
 df_budget["Diff"] = df_budget["Tagesbudget"] - df_budget["Betrag"]
