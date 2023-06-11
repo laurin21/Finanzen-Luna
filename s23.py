@@ -30,3 +30,6 @@ df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag'
 df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
 st.dataframe(df)
+
+
+st.write("Itsch libbe ditsch 🧡")
