@@ -63,7 +63,6 @@ df_budget["Tagesbudget"] = [daily_budget] * days
 df_budget["Diff"] = [0] * days 
 df_budget["Gesamtbetrag"] = [0] * days 
 df_budget["Moving Budget"] = [0] * days 
-df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
 
 st.dataframe(sum_dates)
@@ -71,10 +70,11 @@ st.dataframe(sum_dates)
 st.write("TEST")
 
 for date in range(len(days_list)):
-    st.write(days_list[date])
     for i in range(len(sum_dates)):
         if days_list[date] == sum_dates["Datum"][i]:
             sum_list[date] += sum_dates["Betrag"][i]
+            st.write(sum_dates["Betrag"][i])
+df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce")
 
 st.write("TEST END")
 
@@ -86,6 +86,7 @@ df_budget["Gesamtbetrag"] = df_budget['Betrag'].cumsum()
 df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum()
 
 df_budget["Moving Diff"] = df_budget["Moving Budget"] - df_budget["Gesamtbetrag"]
+
 
 
 st.dataframe(df_budget)
