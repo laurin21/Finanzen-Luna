@@ -37,7 +37,7 @@ df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Ausgabe
 df["Split"].fillna(0, inplace=True)
 df["Split"] = df["Split"].astype('int')
 
-df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce")
+df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce").dt.date 
 df["Ausgaben"] = df["Ausgaben"].str.replace(",",".")
 df["Ausgaben"] = df["Ausgaben"].astype('float')
 
@@ -69,7 +69,7 @@ df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", err
 
 for date in range(len(days_list)):
     for i in range(len(sum_dates)):
-        if datetime.datetime.strptime(days_list[date], '%d.%m.%Y') == sum_dates["Datum"][i]:
+        if dt.datetime.strptime(days_list[date], '%d.%m.%Y') == sum_dates["Datum"][i]:
             sum_list[date] += sum_dates["Ausgaben"][i]
 
 df_budget["Ausgaben"] = sum_list
