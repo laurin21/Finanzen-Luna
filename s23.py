@@ -4,7 +4,7 @@ import streamlit as st
 from google.oauth2 import service_account
 from gsheetsdb import connect
 import pandas as pd
-import datetime
+import datetime as dt
 
 # Create a connection object.
 credentials = service_account.Credentials.from_service_account_info(
@@ -64,7 +64,7 @@ df_budget["Tagesbudget"] = [daily_budget] * days
 df_budget["Diff"] = [0] * days 
 df_budget["Ausgaben Gesamt"] = [0] * days 
 df_budget["Moving Budget"] = [0] * days 
-df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce") #### Sekunden entfernen
+df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce").dt.date 
 
 
 for date in range(len(days_list)):
