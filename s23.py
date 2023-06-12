@@ -84,7 +84,6 @@ for date in range(1, len(df_budget)):
 
 df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum() 
 
-df_budget["Moving Diff"] = df_budget["Moving Budget"] - df_budget["Ausgaben Gesamt"]### FALSCH Muss Moving Diff vom Vortag plus Tagesbudget des aktuellen Tags sein
 
 #####
 
