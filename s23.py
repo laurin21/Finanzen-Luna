@@ -77,9 +77,14 @@ df_budget["Ausgaben"] = sum_list
 df_budget["Diff"] = df_budget["Tagesbudget"] - df_budget["Ausgaben"]
 
 df_budget["Ausgaben Gesamt"] = df_budget['Ausgaben'].cumsum()
-df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum() ### FALSCH Muss Moving Diff vom Vortag plus Tagesbudget des aktuellen Tags sein
 
-df_budget["Moving Diff"] = df_budget["Moving Budget"] - df_budget["Ausgaben Gesamt"]
+df_budget["Moving Diff"][0] = df_budget["Diff"][0]
+for date in range(1, len(df_budget)):
+    df_budget["Moving Diff"][date] = df_budget["Moving Diff"][date-1] + df_budget["Diff"][date]
+
+df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum() 
+
+df_budget["Moving Diff"] = df_budget["Moving Budget"] - df_budget["Ausgaben Gesamt"]### FALSCH Muss Moving Diff vom Vortag plus Tagesbudget des aktuellen Tags sein
 
 #####
 
