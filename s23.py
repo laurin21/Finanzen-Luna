@@ -82,7 +82,7 @@ df_budget["Ausgaben Gesamt"] = df_budget['Ausgaben'].cumsum()
 df_budget['Moving Diff'] = df_budget['Moving Diff'].shift(-1, fill_value=0) - df_budget['Diff'].shift(fill_value=0)
 
 # NaN-Wert von der letzten Zeile zur ersten Zeile verschieben
-df_budget['Moving Diff'] = df_budget['Moving Diff'].shift().fillna(df_budget["Diff"][0])
+#df_budget['Moving Diff'] = df_budget['Moving Diff'].shift().fillna(df_budget["Diff"][0])
 
 df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum() 
 
