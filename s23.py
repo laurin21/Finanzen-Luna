@@ -80,7 +80,7 @@ df_budget["Ausgaben Gesamt"] = df_budget['Ausgaben'].cumsum()
 
 value = df_budget.iloc[0,3]
 
-df_budget["Moving Diff"][0] = value
+df_budget["Moving Diff"][0] = float(value)
 
 for date in range(len(df_budget)-1):
     df_budget["Moving Diff"] = df_budget.iloc[date,6] - df_budget.iloc[date+1,3]
