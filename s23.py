@@ -78,7 +78,9 @@ df_budget["Diff"] = df_budget["Tagesbudget"] - df_budget["Ausgaben"]
 
 df_budget["Ausgaben Gesamt"] = df_budget['Ausgaben'].cumsum()
 
-df_budget["Moving Diff"][0] = df_budget.iloc[0,3]
+value = df_budget.iloc[0,3]
+
+df_budget["Moving Diff"][0] = value
 
 for date in range(len(df_budget)-1):
     df_budget["Moving Diff"] = df_budget.iloc[date,6] - df_budget.iloc[date+1,3]
