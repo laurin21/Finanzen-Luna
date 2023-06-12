@@ -78,7 +78,7 @@ df_budget["Diff"] = df_budget["Tagesbudget"] - df_budget["Ausgaben"]
 
 df_budget["Ausgaben Gesamt"] = df_budget['Ausgaben'].cumsum()
 
-value = df_budget.iloc[0,3]
+value = df_budget.iloc[0,3].copy()
 
 df_budget["Moving Diff"][0] = float(value)
 
