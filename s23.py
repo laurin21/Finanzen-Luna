@@ -75,7 +75,7 @@ df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", err
 for date in range(len(days_list)):
     for i in range(len(sum_dates)):
         if dt.datetime.strptime(days_list[date], '%d.%m.%Y') == sum_dates["Datum"][i]:
-            sum_list[date] += sum_dates["Ausgaben"][i]
+            sum_list[date] += sum_dates["Betrag"][i]
 
 df_budget["Ausgaben"] = sum_list
 
