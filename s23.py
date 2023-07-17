@@ -101,7 +101,7 @@ st.title("Finanzen Interrail")
 
 st.markdown("### Ausgaben pro Tag")
 st.dataframe(sum_dates)
-st.bar_chart(sum_dates["Betrag"])
+st.bar_chart(df_all["Betrag"])
 
 st.markdown("---")
 
@@ -119,7 +119,7 @@ st.line_chart(df_budget[["Ausgaben", "Tagesbudget"]])
 
 st.markdown("---")
 
-st.write(f"Gesamtausgaben {round(df['Ausgaben'].sum(),2)}")
+st.write(f"Gesamtausgaben {round(df['Betrag'].sum(),2)}")
 
 st.markdown("---")
 
