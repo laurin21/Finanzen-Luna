@@ -70,15 +70,13 @@ df_budget["Ausgaben Gesamt"] = [0] * days
 df_budget["Moving Budget"] = [0] * days 
 df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce").dt.date 
 
-st.write(sum_list)
-
 for date in range(len(days_list)):
     for i in range(len(sum_dates)):
+        st.write(dt.datetime.strptime(days_list[date], '%d.%m.%Y'))
+        st.write(sum_dates["Datum"][i])
         if dt.datetime.strptime(days_list[date], '%d.%m.%Y') == sum_dates["Datum"][i]:
             sum_list[date] += sum_dates["Betrag"][i]
             st.write("HALLO")
-
-st.write(sum_list)
 
 df_budget["Ausgaben"] = sum_list
 
