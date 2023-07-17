@@ -6,6 +6,8 @@ from gsheetsdb import connect
 import pandas as pd
 import datetime as dt
 
+#############
+
 # Create a connection object.
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"],
@@ -26,6 +28,7 @@ def run_query(query):
 sheet_url = st.secrets["private_gsheets_url"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
+#############
 
 days = 31
 total_budget = 3000
@@ -45,7 +48,6 @@ df_split = df[df["Split"] == 1]
 df = df[df["Split"] != 1]
 
 splitted = round(float(df_split["Ausgaben"].sum()) / days, 2)
-
 
 
 cats = df["Kategorie"].unique()
@@ -88,7 +90,7 @@ for date in range(len(df_budget)-1):
 df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum() 
 
 
-#####
+#############
 
 st.title("Finanzen Interrail")
 
@@ -112,7 +114,7 @@ st.line_chart(df_budget[["Ausgaben", "Tagesbudget"]])
 
 st.markdown("---")
 
-st.write(f"Gesamtausgaben {df['Ausgaben'].sum()}")
+st.write(f"Gesamtausgaben {round(df['Ausgaben'].sum(),2)}")
 
 st.markdown("---")
 
