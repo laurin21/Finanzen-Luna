@@ -93,14 +93,12 @@ for date in range(len(df_budget)-1):
 df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum() 
 
 
-sum_dates = sum_dates.drop('Datum', axis=1)
-
 #############
 
 st.title("Finanzen Interrail")
 
 st.markdown("### Ausgaben pro Tag")
-st.dataframe(sum_dates)
+st.dataframe(sum_dates["Betrag"])
 st.bar_chart(df_all["Betrag"])
 
 st.markdown("---")
