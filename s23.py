@@ -99,7 +99,7 @@ st.title("Finanzen Interrail")
 
 st.markdown("### Ausgaben pro Tag")
 st.dataframe(sum_dates["Betrag"])
-st.bar_chart(df_all["Betrag"])
+st.bar_chart(df["Betrag"])
 
 st.markdown("---")
 
