@@ -56,6 +56,9 @@ cats = df["Kategorie"].unique()
 sum_cats = pd.DataFrame(df_all.groupby("Kategorie")["Betrag"].sum())
 sum_dates = pd.DataFrame(df.groupby("Datum")["Betrag"].sum())
 sum_dates["Datum"] = sum_dates.index
+
+st.write(sum_dates)
+
 sum_dates["Betrag"] = sum_dates["Betrag"] + splitted
 
 st.write(sum_dates)
