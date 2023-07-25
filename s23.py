@@ -108,6 +108,10 @@ st.line_chart(df_budget[["Betrag", "Budget"]])
 st.markdown("---")
 
 st.write(f"Gesamtausgaben: {round(df_feed['Betrag'].sum(),2)} €")
+st.write(f"Gesamtausgaben: {round(df_city['Betrag'].sum(),2)} €")
+st.write(f"Gesamtausgaben: {round(df_categories['Betrag'].sum(),2)} €")
+st.write(f"Gesamtausgaben: {round(df_days['Betrag'].sum(),2)} €")
+
 
 st.markdown("---")
 
