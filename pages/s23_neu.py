@@ -46,8 +46,6 @@ df_split = df_feed[df_feed["Split"] == 1]
 
 df_days = pd.DataFrame([days_list])
 
-st.write("Itsch libbe ditsch 🧡")
-
 df = pd.DataFrame()
 
 df_budget = pd.DataFrame()
@@ -68,3 +66,11 @@ str.write("Budget:")
 st.write(df_budget)
 str.write("Stadt:")
 st.write(df_city)
+
+
+
+
+
+##########################
+
+st.write("Itsch libbe ditsch 🧡")
