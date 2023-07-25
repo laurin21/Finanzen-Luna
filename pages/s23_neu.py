@@ -30,7 +30,6 @@ rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 ##########################
 days = 31
-days = st.number_input('Länge der Reise')
 total_budget = 3000
 daily_budget = round(total_budget / days, 2)
 
@@ -46,9 +45,9 @@ days_list = ["18.07.2023", "19.07.2023", "20.07.2023", "21.07.2023", "22.07.2023
 
 df_split = df_feed[df_feed["Split"] == 1]
 splitted = round(float(df_split["Betrag"].sum()) / days, 2)
+splitted_per_day = [splitted]*days
 
-
-df_days = pd.DataFrame([days_list])
+df_days = pd.DataFrame([days_list, splitted_per_day])
 
 df = pd.DataFrame()
 
