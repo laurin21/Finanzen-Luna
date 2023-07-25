@@ -119,19 +119,24 @@ option = st.multiselect(
 
 for i in option:
     if i == "Rohdaten":
+        st.markdown("##### Rohdaten")
         st.dataframe(df_feed)
 
     if i == "Budget":
-        st.table(df_budget)
+        st.markdown("##### Budgettabelle")
+        st.dataframe(df_budget)
 
     if i == "Pro Tag":
-        st.write(df_days)
+        st.markdown("##### Pro Tag")
+        st.dataframe(df_days)
 
     if i == "Pro Kategorie":
-        st.table(df_categories)
+        st.markdown("##### Pro Kategorie")
+        st.dataframe(df_categories)
 
     if i == "Pro Stadt":
-        st.table(df_city)
+        st.markdown("##### Pro Stadt")
+        st.dataframe(df_city)
 
 ##########################
 
