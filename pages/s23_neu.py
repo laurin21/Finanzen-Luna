@@ -77,8 +77,9 @@ df_budget["Betrag Gesamt"] = df_budget['Betrag'].cumsum()
 df_budget["Budget Gesamt"] = df_budget['Budget'].cumsum()
 df_budget["Gesamt Diff"] = df_budget["Budget Gesamt"] - df_budget["Betrag Gesamt"]
 
-
 df_city = pd.DataFrame(df_feed.groupby("Stadt")["Betrag"].sum())
+
+df_categories = pd.DataFrame(df_feed.groupby("Kategorie")["Betrag"].sum())
 
 
 ##########################
@@ -86,6 +87,11 @@ df_city = pd.DataFrame(df_feed.groupby("Stadt")["Betrag"].sum())
 st.title("Finanzen Interrail")
 st.markdown("### Ausgaben pro Tag")
 st.bar_chart(df_days["Betrag"])
+
+st.markdown("---")
+
+st.markdown("### Ausgaben pro Kategorie")
+st.bar_chart(df_categories["Betrag"])
 
 ##########################
 
@@ -102,6 +108,8 @@ st.write("df_budget:")
 st.write(df_budget)
 st.write("df_city:")
 st.write(df_city)
+st.write("df_categories")
+st.write(df_categories)
 
 ##########################
 
