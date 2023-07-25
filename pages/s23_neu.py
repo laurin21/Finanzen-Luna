@@ -85,7 +85,7 @@ df_city = pd.DataFrame(df_feed.groupby("Stadt")["Betrag"].sum())
 
 st.title("Finanzen Interrail")
 st.markdown("### Ausgaben pro Tag")
-st.barchart(df_days["Betrag"])
+st.bar_chart(df_days["Betrag"])
 
 ##########################
 
