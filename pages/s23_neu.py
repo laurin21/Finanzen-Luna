@@ -36,7 +36,6 @@ daily_budget = round(total_budget / days, 2)
 df_feed = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag', 'Stadt', 'Split'])
 df_feed["Split"].fillna(0, inplace=True)
 df_feed["Split"] = df_feed["Split"].astype('int')
-
 df_feed["Stadt"] = df_feed["Stadt"].astype("category")
 df_feed["Datum"] = pd.to_datetime(df_feed["Datum"], format = "%d.%m.%Y", errors = "coerce").dt.date 
 df_feed["Betrag"] = df_feed["Betrag"].str.replace(",",".")
@@ -49,6 +48,8 @@ splitted = round(float(df_split["Betrag"].sum()) / days, 2)
 splitted_per_day = [splitted]*days
 
 df_days = pd.DataFrame([days_list, splitted_per_day])
+df_days = df_days.T
+#for day in df_days[""]
 
 df = pd.DataFrame()
 
