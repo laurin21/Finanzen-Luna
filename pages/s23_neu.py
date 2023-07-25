@@ -125,7 +125,7 @@ for i in option:
         st.table(df_budget)
 
     if i == "Pro Tag":
-        st.qrite(df_days)
+        st.write(df_days)
 
     if i == "Pro Kategorie":
         st.table(df_categories)
