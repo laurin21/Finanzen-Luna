@@ -28,7 +28,7 @@ def run_query(query):
 sheet_url = st.secrets["private_gsheets_url"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
-#############
+##########################
 
 days = 31
 total_budget = 3000
@@ -42,10 +42,16 @@ df_feed["Stadt"] = df_feed["Stadt"].astype("category")
 days_list = ["18.07.2023", "19.07.2023", "20.07.2023", "21.07.2023", "22.07.2023", "23.07.2023", "24.07.2023", "25.07.2023", "26.07.2023", "27.07.2023", "28.07.2023", "29.07.2023", "30.07.2023", "31.07.2023", "01.08.2023", "02.08.2023", "03.08.2023", "04.08.2023", "05.08.2023", "06.08.2023", "07.08.2023", "08.08.2023", "09.08.2023", "10.08.2023", "11.08.2023", "12.08.2023", "13.08.2023", "14.08.2023", "15.08.2023", "16.08.2023", "17.08.2023"]
 
 df_split = df_feed[df_feed["Split"] == 1]
+splitted = round(float(df_split["Betrag"].sum()) / days, 2)
 
-
-df_days = pd.DataFrame([days_list, ])
+df_days = pd.DataFrame([days_list])
 
 st.write("Itsch libbe ditsch 🧡")
 
 
+##########################
+
+st.write(df_feed)
+st.write(df_split)
+st.write(df)
+st.write(df_days)
