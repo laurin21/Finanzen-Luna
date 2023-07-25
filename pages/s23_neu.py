@@ -107,7 +107,7 @@ st.line_chart(df_budget[["Betrag", "Budget"]])
 
 st.markdown("---")
 
-st.write(f"Gesamtausgaben {round(df_feed['Betrag'].sum(),2)}")
+st.write(f"Gesamtausgaben: {round(df_feed['Betrag'].sum(),2)}")
 
 st.markdown("---")
 
@@ -119,13 +119,13 @@ option = st.multiselect(
 
 for i in option:
     if i == "Rohdaten":
-        st.table(df_feed)
+        st.dataframe(df_feed)
 
     if i == "Budget":
         st.table(df_budget)
 
     if i == "Pro Tag":
-        st.table(df_days)
+        st.qrite(df_days)
 
     if i == "Pro Kategorie":
         st.table(df_categories)
