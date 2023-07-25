@@ -99,10 +99,10 @@ st.bar_chart(df_city["Betrag"])
 
 st.markdown("---")
 
-st.markdown("### Ausgaben Gesamt vs. Moving Budgetdifferenz")
+st.markdown("### Betrag vs. Budget (kummulativ)")
 st.line_chart(df_budget[["Betrag Gesamt", "Budget Gesamt"]])
 
-st.markdown("### Ausgaben vs. Budget (pro Tag)")
+st.markdown("### Betrag vs. Budget (pro Tag)")
 st.line_chart(df_budget[["Betrag", "Budget"]])
 
 st.markdown("---")
@@ -111,23 +111,13 @@ st.write(f"Gesamtausgaben {round(df_feed['Betrag'].sum(),2)}")
 
 st.markdown("---")
 
-##########################
+st.markdown("### Tabellen")
 
-st.markdown("---")
-st.write("df_feed:")
-st.write(df_feed)
-st.write("df_split:")
-st.write(df_split)
-st.write("df:")
-st.write(df)
-st.write("df_days:")
-st.write(df_days)
-st.write("df_budget:")
-st.write(df_budget)
-st.write("df_city:")
-st.write(df_city)
-st.write("df_categories")
-st.write(df_categories)
+option = st.multiselect(
+    'Welche Tabellen sollen angezeigt werden?',
+    ['Rohdaten', 'Budget', 'Pro Tag', 'Pro Kategorie', 'Pro Stadt'])
+
+st.write(option)
 
 ##########################
 
