@@ -58,19 +58,19 @@ new_column_names = {0: 'Datum',
                     1: 'Betrag'}
 df_days.rename(columns=new_column_names, inplace=True)
 
-df_days_new = df_days.merge(df_no_split, on='Datum', how='left', suffixes=('_df1', '_df2'))
+df_days = df_days.merge(df_no_split, on='Datum', how='left', suffixes=('_df1', '_df2'))
 
 # Fill missing values in "Value_df2" column with 0 (to handle days without data in df2)
-df_days_new['Betrag_df2'].fillna(0, inplace=True)
+df_days['Betrag_df2'].fillna(0, inplace=True)
 
 # Add the "Value_df2" to "Value_df1" and store the result in a new column "Result"
-df_days_new['Betrag'] = df_days_new['Betrag_df1'] + df_days_new['Betrag_df2']
+df_days['Betrag'] = df_days['Betrag_df1'] + df_days['Betrag_df2']
 
 # Drop the unnecessary columns if needed
-df_days_new.drop(columns=['Betrag_df1', 'Betrag_df2'], inplace=True)
+df_days.drop(columns=['Betrag_df1', 'Betrag_df2'], inplace=True)
 
 st.write("TEST")
-st.write(df_days_new)
+st.write(df_days)
 
 df = pd.DataFrame()
 
