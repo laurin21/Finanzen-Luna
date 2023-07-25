@@ -100,7 +100,7 @@ st.bar_chart(df_city["Betrag"])
 st.markdown("---")
 
 st.markdown("### Ausgaben Gesamt vs. Moving Budgetdifferenz")
-st.line_chart(df_budget[["Betrag Gesamt", "Gesamt Diff"]])
+st.line_chart(df_budget[["Betrag Gesamt", "Budget Gesamt"]])
 
 st.markdown("### Ausgaben vs. Budget (pro Tag)")
 st.line_chart(df_budget[["Betrag", "Budget"]])
