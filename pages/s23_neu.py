@@ -64,11 +64,12 @@ df_days.drop(columns=['Betrag_df1', 'Betrag_df2'], inplace=True)
 df = df_feed.copy()
 st.write(df)
 for index in range(len(df_split)):
-    amount_per_day = df_split[index]["Betrag"] / days
+    amount_per_day = df_split["Betrag"][index] / days
     daily_expenses = pd.DataFrame({'Datum': days_list, 'Beschreibung': df_split[index]["Beschreibung"] + " (splitted)", 'Kategorie': df_split[index]["Kategorie"], 'Betrag': amount_per_day})
     df = pd.concat([df, daily_expenses], ignore_index=True)
     df = df.sort_values(by='Datum').reset_index(drop=True)
 
+st.write(df)
 
 df_budget = pd.DataFrame()
 
