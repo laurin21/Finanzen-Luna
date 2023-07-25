@@ -52,8 +52,8 @@ st.write(df_no_split)
 
 df_days = pd.DataFrame([days_list, splitted_per_day])
 df_days = df_days.T
-for day in df_no_split[0]:
-    st.write()
+for day in df_no_split["Datum"]:
+    st.write(day)
 
 df = pd.DataFrame()
 
