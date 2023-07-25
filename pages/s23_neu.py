@@ -117,7 +117,21 @@ option = st.multiselect(
     'Welche Tabellen sollen angezeigt werden?',
     ['Rohdaten', 'Budget', 'Pro Tag', 'Pro Kategorie', 'Pro Stadt'])
 
-st.write(option)
+for i in option:
+    if i == "Rohdaten":
+        st.table(df_feed)
+
+    if i == "Budget":
+        st.table(df_budget)
+
+    if i == "Pro Tag":
+        st.table(df_days)
+
+    if i == "Pro Kategorie":
+        st.table(df_categories)
+
+    if i == "Pro Stadt":
+        st.table(df_city)
 
 ##########################
 
