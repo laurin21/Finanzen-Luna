@@ -48,6 +48,8 @@ df_days = pd.DataFrame([days_list])
 
 st.write("Itsch libbe ditsch 🧡")
 
+df = pd.DataFrame()
+
 
 ##########################
 
