@@ -76,7 +76,8 @@ df_budget["Budget Gesamt"] = df_budget['Budget'].cumsum()
 df_budget["Gesamt Diff"] = df_budget["Budget Gesamt"] - df_budget["Betrag Gesamt"]
 
 
-df_city = pd.DataFrame()
+df_city = pd.DataFrame(df_feed.groupby("Stadt")["Betrag"].sum())
+
 
 ##########################
 
