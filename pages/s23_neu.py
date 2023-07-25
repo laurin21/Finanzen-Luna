@@ -71,6 +71,9 @@ for index in range(len(df_split)):
 df_budget = df_days.copy()
 df_budget["Budget"] = daily_budget
 df_budget["Budget Differenz"] = df_budget["Budget"] - df_budget["Betrag"]
+df_budget["Betrag Gesamt"] = df_budget['Betrag'].cumsum()
+df_budget["Budget Gesamt"] = df_budget['Budget'].cumsum()
+df_budget["Gesamt Diff"] = df_budget["Budget Gesamt"] - df_budget["Betrag Gesamt"]
 
 
 df_city = pd.DataFrame()
