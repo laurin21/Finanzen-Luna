@@ -33,7 +33,7 @@ days = 31
 total_budget = 3000
 daily_budget = round(total_budget / days, 2)
 
-df_feed = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag', 'Stadt', 'Split'])
+df_feed = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag', 'Stadt'])
 df_feed["Split"].fillna(0, inplace=True)
 df_feed["Split"] = df_feed["Split"].astype('int')
 df_feed['Stadt'] = df_feed['Stadt'].fillna("Split")
