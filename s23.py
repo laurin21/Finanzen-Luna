@@ -28,108 +28,116 @@ def run_query(query):
 sheet_url = st.secrets["private_gsheets_url"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
-#############
-
+##########################
 days = 31
 total_budget = 3000
 daily_budget = round(total_budget / days, 2)
 
-
-df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag', 'Stadt', 'Split'])
-
-df["Split"].fillna(0, inplace=True)
-df["Split"] = df["Split"].astype('int')
-
-df["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce").dt.date 
-df["Betrag"] = df["Betrag"].str.replace(",",".")
-df["Betrag"] = df["Betrag"].astype('float')
-
-df_all = df.copy()
-df_split = df[df["Split"] == 1]
-df = df[df["Split"] != 1]
-
-splitted = round(float(df_split["Betrag"].sum()) / days, 2)
-
-
-cats = df["Kategorie"].unique()
-
-sum_cats = pd.DataFrame(df_all.groupby("Kategorie")["Betrag"].sum())
-sum_dates = pd.DataFrame(df.groupby("Datum")["Betrag"].sum())
-sum_dates["Datum"] = sum_dates.index
-sum_dates["Betrag"] = sum_dates["Betrag"] + splitted
+df_feed = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag', 'Stadt'])
+df_feed['Stadt'] = df_feed['Stadt'].fillna("Split")
+df_feed["Stadt"] = df_feed["Stadt"].astype("category")
+df_feed["Datum"] = pd.to_datetime(df_feed["Datum"], format = "%d.%m.%Y", errors = "coerce").dt.date 
+df_feed["Betrag"] = df_feed["Betrag"].str.replace(",",".")
+df_feed["Betrag"] = df_feed["Betrag"].astype('float')
 
 days_list = ["18.07.2023", "19.07.2023", "20.07.2023", "21.07.2023", "22.07.2023", "23.07.2023", "24.07.2023", "25.07.2023", "26.07.2023", "27.07.2023", "28.07.2023", "29.07.2023", "30.07.2023", "31.07.2023", "01.08.2023", "02.08.2023", "03.08.2023", "04.08.2023", "05.08.2023", "06.08.2023", "07.08.2023", "08.08.2023", "09.08.2023", "10.08.2023", "11.08.2023", "12.08.2023", "13.08.2023", "14.08.2023", "15.08.2023", "16.08.2023", "17.08.2023"]
-sum_list = [splitted] * days 
 
-df_budget = pd.DataFrame(columns =['Datum', 'Ausgaben', 'Tagesbudget', 'Diff', "Ausgaben Gesamt",  "Moving Budget", "Moving Diff"])
-df_budget["Datum"] = days_list
-df_budget["Ausgaben"] = sum_list
-df_budget["Tagesbudget"] = [daily_budget] * days
-df_budget["Diff"] = [0] * days 
-df_budget["Ausgaben Gesamt"] = [0] * days 
-df_budget["Moving Budget"] = [0] * days 
-df_budget["Datum"] = pd.to_datetime(df_budget["Datum"], format = "%d.%m.%Y", errors = "coerce").dt.date 
+df_split = df_feed[df_feed["Stadt"] == "Split"]
+splitted = round(float(df_split["Betrag"].sum()) / days, 2)
+splitted_per_day = [splitted]*days
+df_split.reset_index(drop=True, inplace=True)
+df_split.drop(columns=['Stadt'], inplace=True)
 
-for date in range(len(days_list)):
-    for i in range(len(sum_dates)):
-        if str(dt.datetime.strptime(days_list[date], '%d.%m.%Y'))[:-9] == str(sum_dates["Datum"][i]):
-            sum_list[date] += sum_dates["Betrag"][i]
+df_no_split = df_feed[df_feed["Stadt"] != "Split"]
+df_no_split['Datum'] = df_no_split['Datum'].apply(lambda dt: dt.strftime('%d.%m.%Y'))
+sum_dates = pd.DataFrame(df_no_split.groupby("Datum")["Betrag"].sum())
 
-df_budget["Ausgaben"] = sum_list
+df_days = pd.DataFrame([days_list, splitted_per_day])
+df_days = df_days.T
+new_column_names = {0: 'Datum',
+                    1: 'Betrag'}
+df_days.rename(columns=new_column_names, inplace=True)
+df_days = df_days.merge(sum_dates, on='Datum', how='left', suffixes=('_df1', '_df2'))
+df_days['Betrag_df2'].fillna(0, inplace=True)
+df_days['Betrag'] = df_days['Betrag_df1'] + df_days['Betrag_df2']
+df_days.drop(columns=['Betrag_df1', 'Betrag_df2'], inplace=True)
 
-df_budget["Diff"] = df_budget["Tagesbudget"] - df_budget["Ausgaben"]
+df = df_feed.copy()
+for index in range(len(df_split)):
+    amount_per_day = df_split.loc[index]["Betrag"] / days
+    daily_expenses = pd.DataFrame({'Datum': days_list, 'Beschreibung': df_split.loc[index]["Beschreibung"] + " (splitted)", 'Kategorie': df_split.loc[index]["Kategorie"], 'Betrag': round(amount_per_day, 2)})
+    df = pd.concat([df, daily_expenses], ignore_index=True)
 
-df_budget["Ausgaben Gesamt"] = df_budget['Ausgaben'].cumsum()
+df_budget = df_days.copy()
+df_budget["Budget"] = daily_budget
+df_budget["Budget Differenz"] = df_budget["Budget"] - df_budget["Betrag"]
+df_budget["Betrag Gesamt"] = df_budget['Betrag'].cumsum()
+df_budget["Budget Gesamt"] = df_budget['Budget'].cumsum()
+df_budget["Gesamt Diff"] = df_budget["Budget Gesamt"] - df_budget["Betrag Gesamt"]
 
-value = df_budget.iloc[0,3].copy()
+df_city = pd.DataFrame(df_feed.groupby("Stadt")["Betrag"].sum())
+df_city.sort_values(by=['Betrag'], ascending = False, inplace=True)
 
-df_budget["Moving Diff"][0] = float(value)
+df_categories = pd.DataFrame(df_feed.groupby("Kategorie")["Betrag"].sum())
+df_categories.sort_values(by=['Betrag'], ascending = False, inplace=True)
 
-for date in range(len(df_budget)-1):
-    df_budget["Moving Diff"] = df_budget.iloc[date, 6] - df_budget.iloc[date+1, 3]
-
-df_budget["Moving Budget"] = df_budget['Tagesbudget'].cumsum() 
-
-
-#############
+##########################
 
 st.title("Finanzen Interrail")
-
 st.markdown("### Ausgaben pro Tag")
-st.dataframe(sum_dates["Betrag"])
-st.bar_chart(df_all["Betrag"])
+st.bar_chart(df_days["Betrag"])
 
 st.markdown("---")
 
 st.markdown("### Ausgaben pro Kategorie")
-st.dataframe(sum_cats)
-st.bar_chart(sum_cats)
+st.bar_chart(df_categories["Betrag"])
 
 st.markdown("---")
 
-st.markdown("### Ausgaben Gesamt vs. Moving Budgetdifferenz")
-st.line_chart(df_budget[["Ausgaben Gesamt", "Moving Diff"]])
-
-st.markdown("### Ausgaben vs. Budget (pro Tag)")
-st.line_chart(df_budget[["Ausgaben", "Tagesbudget"]])
+st.markdown("### Ausgaben pro Stadt")
+st.bar_chart(df_city["Betrag"])
 
 st.markdown("---")
 
-st.write(f"Gesamtausgaben {round(df_all['Betrag'].sum(),2)}")
+st.markdown("### Betrag vs. Budget (kummulativ)")
+st.line_chart(df_budget[["Betrag Gesamt", "Budget Gesamt"]])
+
+st.markdown("### Betrag vs. Budget (pro Tag)")
+st.line_chart(df_budget[["Betrag", "Budget"]])
 
 st.markdown("---")
 
-see_data = st.expander('Weitere Infos')
-with see_data:
-    
-    st.markdown("### Budgetübersicht")
-    st.dataframe(df_budget)
-    st.markdown("---")
-
-    st.markdown("### Rohdaten")    
-    st.dataframe(df_all)
-    st.markdown("---")
+st.write(f"Gesamtausgaben: {round(df_feed['Betrag'].sum(),2)}")
 
 st.markdown("---")
+
+st.markdown("### Tabellen")
+
+option = st.multiselect(
+    'Welche Tabellen sollen angezeigt werden?',
+    ['Rohdaten', 'Budget', 'Pro Tag', 'Pro Kategorie', 'Pro Stadt'])
+
+for i in option:
+    if i == "Rohdaten":
+        st.markdown("##### Rohdaten")
+        st.dataframe(df_feed)
+
+    if i == "Budget":
+        st.markdown("##### Budgettabelle")
+        st.dataframe(df_budget)
+
+    if i == "Pro Tag":
+        st.markdown("##### Pro Tag")
+        st.dataframe(df_days)
+
+    if i == "Pro Kategorie":
+        st.markdown("##### Pro Kategorie")
+        st.dataframe(df_categories)
+
+    if i == "Pro Stadt":
+        st.markdown("##### Pro Stadt")
+        st.dataframe(df_city)
+
+##########################
 
 st.write("Itsch libbe ditsch 🧡")
