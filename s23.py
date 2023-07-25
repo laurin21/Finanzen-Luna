@@ -140,4 +140,9 @@ for i in option:
 
 ##########################
 
+st.markdown("---")
+st.write("")
+st.write("")
+st.write("")
+st.write("")
 st.write("Itsch libbe ditsch 🧡")
