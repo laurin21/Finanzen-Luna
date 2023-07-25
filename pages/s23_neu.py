@@ -61,7 +61,7 @@ df_days['Betrag_df2'].fillna(0, inplace=True)
 df_days['Betrag'] = df_days['Betrag_df1'] + df_days['Betrag_df2']
 df_days.drop(columns=['Betrag_df1', 'Betrag_df2'], inplace=True)
 
-st.write(df_split["Betrag"][4])
+#st.write(df_split["Betrag"][4])
 
 df = df_feed.copy()
 st.write(df)
