@@ -70,6 +70,8 @@ for index in range(len(df_split)):
 
 df_budget = df_days.copy()
 df_budget["Budget"] = daily_budget
+df_budget["Budget Differenz"] = df_budget["Budget"] - df_budget["Betrag"]
+
 
 df_city = pd.DataFrame()
 
