@@ -94,6 +94,11 @@ st.markdown("---")
 st.markdown("### Ausgaben pro Kategorie")
 st.bar_chart(df_categories["Betrag"])
 
+st.markdown("---")
+
+st.markdown("### Ausgaben pro Stadt")
+st.bar_chart(df_city["Betrag"])
+
 ##########################
 
 st.markdown("---")
