@@ -72,8 +72,15 @@ df_days['Betrag_df2'].fillna(0, inplace=True)
 # Add the "Value_df2" to "Value_df1" and store the result in a new column "Result"
 df_days['Betrag'] = df_days['Betrag_df1'] + df_days['Betrag_df2']
 
+
+st.write("df_days")
+st.write(df_days)
+
 # Drop the unnecessary columns if needed
 df_days.drop(columns=['Betrag_df1', 'Betrag_df2'], inplace=True)
+
+st.write("df_days")
+st.write(df_days)
 
 st.write("TEST")
 st.write(df_days)
