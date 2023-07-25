@@ -53,37 +53,13 @@ sum_dates = pd.DataFrame(df_no_split.groupby("Datum")["Betrag"].sum())
 
 df_days = pd.DataFrame([days_list, splitted_per_day])
 df_days = df_days.T
-
 new_column_names = {0: 'Datum',
                     1: 'Betrag'}
 df_days.rename(columns=new_column_names, inplace=True)
-
-st.write("df_days")
-st.write(df_days)
-st.write("df_no_split")
-st.write(sum_dates)
-
-
 df_days = df_days.merge(sum_dates, on='Datum', how='left', suffixes=('_df1', '_df2'))
-
-# Fill missing values in "Value_df2" column with 0 (to handle days without data in df2)
 df_days['Betrag_df2'].fillna(0, inplace=True)
-
-# Add the "Value_df2" to "Value_df1" and store the result in a new column "Result"
 df_days['Betrag'] = df_days['Betrag_df1'] + df_days['Betrag_df2']
-
-
-st.write("df_days")
-st.write(df_days)
-
-# Drop the unnecessary columns if needed
 df_days.drop(columns=['Betrag_df1', 'Betrag_df2'], inplace=True)
-
-st.write("df_days")
-st.write(df_days)
-
-st.write("TEST")
-st.write(df_days)
 
 df = pd.DataFrame()
 
