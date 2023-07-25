@@ -68,9 +68,8 @@ for index in range(len(df_split)):
     daily_expenses = pd.DataFrame({'Datum': days_list, 'Beschreibung': df_split.loc[index]["Beschreibung"] + " (splitted)", 'Kategorie': df_split.loc[index]["Kategorie"], 'Betrag': round(amount_per_day, 2)})
     df = pd.concat([df, daily_expenses], ignore_index=True)
 
-st.write(df)
-
-df_budget = pd.DataFrame()
+df_budget = df_days.copy()
+df_budget["Budget"] = daily_budget
 
 df_city = pd.DataFrame()
 
