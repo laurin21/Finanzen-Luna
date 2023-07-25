@@ -64,7 +64,7 @@ st.write("df_no_split")
 st.write(df_no_split)
 
 
-df_days = df_no_split.merge(df_days, on='Datum', how='left', suffixes=('_df1', '_df2'))
+df_days = df_days.merge(df_no_split, on='Datum', how='left', suffixes=('_df1', '_df2'))
 
 # Fill missing values in "Value_df2" column with 0 (to handle days without data in df2)
 df_days['Betrag_df2'].fillna(0, inplace=True)
