@@ -38,11 +38,13 @@ df_feed = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Be
 df_feed["Split"].fillna(0, inplace=True)
 df_feed["Split"] = df_feed["Split"].astype('int')
 df_feed["Stadt"] = df_feed["Stadt"].astype("category")
+df_feed["Datum"] = pd.to_datetime(df["Datum"], format = "%d.%m.%Y", errors = "coerce").dt.date 
+df_feed["Betrag"] = df_feed["Betrag"].str.replace(",",".")
+df_feed["Betrag"] = df_feed["Betrag"].astype('float')
 
 days_list = ["18.07.2023", "19.07.2023", "20.07.2023", "21.07.2023", "22.07.2023", "23.07.2023", "24.07.2023", "25.07.2023", "26.07.2023", "27.07.2023", "28.07.2023", "29.07.2023", "30.07.2023", "31.07.2023", "01.08.2023", "02.08.2023", "03.08.2023", "04.08.2023", "05.08.2023", "06.08.2023", "07.08.2023", "08.08.2023", "09.08.2023", "10.08.2023", "11.08.2023", "12.08.2023", "13.08.2023", "14.08.2023", "15.08.2023", "16.08.2023", "17.08.2023"]
 
 df_split = df_feed[df_feed["Split"] == 1]
-st.write(df_split.columns)
 df_split["Betrag"] = df_split["Betrag"].astype('float')
 splitted = round(float(df_split["Betrag"].sum()) / days, 2)
 
