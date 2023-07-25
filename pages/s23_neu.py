@@ -89,8 +89,10 @@ st.bar_chart(df_days["Betrag"])
 
 st.markdown("---")
 
+st.write(df_categories)
+
 st.markdown("### Ausgaben pro Kategorie")
-st.bar_chart(df_categories["Betrag"])
+#st.bar_chart(df_categories["Betrag"])
 
 st.markdown("---")
 
