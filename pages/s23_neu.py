@@ -54,17 +54,17 @@ df_city = pd.DataFrame()
 
 ##########################
 
-str.write("Feed:")
+st.write("Feed:")
 st.write(df_feed)
-str.write("Split:")
+st.write("Split:")
 st.write(df_split)
-str.write("Main:")
+st.write("Main:")
 st.write(df)
-str.write("Days:")
+st.write("Days:")
 st.write(df_days)
-str.write("Budget:")
+st.write("Budget:")
 st.write(df_budget)
-str.write("Stadt:")
+st.write("Stadt:")
 st.write(df_city)
 
 
