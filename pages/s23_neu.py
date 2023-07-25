@@ -76,10 +76,10 @@ df_budget["Budget Gesamt"] = df_budget['Budget'].cumsum()
 df_budget["Gesamt Diff"] = df_budget["Budget Gesamt"] - df_budget["Betrag Gesamt"]
 
 df_city = pd.DataFrame(df_feed.groupby("Stadt")["Betrag"].sum())
-df_city.sort_values(by='Betrag', ascending = False, inplace=True)
+df_city.sort_values(by=['Betrag'], ascending = False, inplace=True)
 
 df_categories = pd.DataFrame(df_feed.groupby("Kategorie")["Betrag"].sum())
-df_categories.sort_values(by='Betrag', ascending = False, inplace=True)
+df_categories.sort_values(by=['Betrag'], ascending = False, inplace=True)
 
 ##########################
 
@@ -92,7 +92,7 @@ st.markdown("---")
 st.write(df_categories)
 
 st.markdown("### Ausgaben pro Kategorie")
-#st.bar_chart(df_categories["Betrag"])
+st.bar_chart(df_categories["Betrag"])
 
 st.markdown("---")
 
