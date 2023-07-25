@@ -48,23 +48,22 @@ splitted = round(float(df_split["Betrag"].sum()) / days, 2)
 splitted_per_day = [splitted]*days
 
 df_no_split = df_feed[df_feed["Split"] != 1]
-st.write("NO SPLIT:")
-st.write(df_no_split)
-st.write("END")
 df_no_split['Datum'] = df_no_split['Datum'].apply(lambda dt: dt.strftime('%d.%m.%Y'))
-st.write("NO SPLIT:")
-st.write(df_no_split)
-st.write("END")
 sum_dates = pd.DataFrame(df_no_split.groupby("Datum")["Betrag"].sum())
-
-st.write(sum_dates)
 
 df_days = pd.DataFrame([days_list, splitted_per_day])
 df_days = df_days.T
 
-st.write("NO SPLIT:")
-st.write(df_days)
-st.write("END")
+df_days = df_days.merge(df_no_split, on='Datum', how='left', suffixes=('_df1', '_df2'))
+
+# Fill missing values in "Value_df2" column with 0 (to handle days without data in df2)
+df_days['Value_df2'].fillna(0, inplace=True)
+
+# Add the "Value_df2" to "Value_df1" and store the result in a new column "Result"
+df_days['Betrag'] = df_days['Value_df1'] + df_days['Value_df2']
+
+# Drop the unnecessary columns if needed
+df_days.drop(columns=['Value_df1', 'Value_df2'], inplace=True)
 
 df = pd.DataFrame()
 
