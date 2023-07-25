@@ -89,8 +89,6 @@ st.bar_chart(df_days["Betrag"])
 
 st.markdown("---")
 
-st.write(df_categories)
-
 st.markdown("### Ausgaben pro Kategorie")
 st.bar_chart(df_categories["Betrag"])
 
@@ -98,6 +96,20 @@ st.markdown("---")
 
 st.markdown("### Ausgaben pro Stadt")
 st.bar_chart(df_city["Betrag"])
+
+st.markdown("---")
+
+st.markdown("### Ausgaben Gesamt vs. Moving Budgetdifferenz")
+st.line_chart(df_budget[["Betrag Gesamt", "Gesamt Diff"]])
+
+st.markdown("### Ausgaben vs. Budget (pro Tag)")
+st.line_chart(df_budget[["Betrag", "Budget"]])
+
+st.markdown("---")
+
+st.write(f"Gesamtausgaben {round(df_feed['Betrag'].sum(),2)}")
+
+st.markdown("---")
 
 ##########################
 
