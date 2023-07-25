@@ -35,7 +35,7 @@ total_budget = 3000
 daily_budget = round(total_budget / days, 2)
 
 
-df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag', "Stadt" 'Split'])
+df = pd.DataFrame(rows, columns =['Datum', 'Beschreibung', 'Kategorie', 'Betrag', 'Stadt', 'Split'])
 
 df["Split"].fillna(0, inplace=True)
 df["Split"] = df["Split"].astype('int')
