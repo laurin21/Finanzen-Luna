@@ -47,7 +47,7 @@ df_split = df_feed[df_feed["Stadt"] == None]
 splitted = round(float(df_split["Betrag"].sum()) / days, 2)
 splitted_per_day = [splitted]*days
 df_split.reset_index(drop=True, inplace=True)
-df_split.drop(columns=['Satdt'], inplace=True)
+df_split.drop(columns=['Stadt'], inplace=True)
 
 df_no_split = df_feed[df_feed["Split"] != 1]
 df_no_split['Datum'] = df_no_split['Datum'].apply(lambda dt: dt.strftime('%d.%m.%Y'))
