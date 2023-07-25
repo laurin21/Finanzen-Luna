@@ -54,6 +54,10 @@ sum_dates = pd.DataFrame(df_no_split.groupby("Datum")["Betrag"].sum())
 df_days = pd.DataFrame([days_list, splitted_per_day])
 df_days = df_days.T
 
+new_column_names = {0: 'Datum',
+                    1: 'Betrag'}
+df_days.rename(columns=new_column_names, inplace=True)
+
 st.write(df_days)
 
 df_days_new = df_days.merge(df_no_split, on='Datum', how='left', suffixes=('_df1', '_df2'))
