@@ -83,26 +83,25 @@ df_city = pd.DataFrame(df_feed.groupby("Stadt")["Betrag"].sum())
 
 ##########################
 
-st.write("Feed:")
-st.write(df_feed)
-st.write("Split:")
-st.write(df_split)
-st.write("Main:")
-st.write(df)
-st.write("Days:")
-st.write(df_days)
-st.write("Budget:")
-st.write(df_budget)
-st.write("Stadt:")
-st.write(df_city)
-st.markdown("---")
+st.title("Finanzen Interrail")
+st.markdown("### Ausgaben pro Tag")
+st.barchart(df_days)
 
 ##########################
 
-
-st.title("Finanzen Interrail")
-st.markdown("### Ausgaben pro Tag")
-
+st.markdown("---")
+st.write("df_feed:")
+st.write(df_feed)
+st.write("df_split:")
+st.write(df_split)
+st.write("df:")
+st.write(df)
+st.write("df_days:")
+st.write(df_days)
+st.write("df_budget:")
+st.write(df_budget)
+st.write("df_city:")
+st.write(df_city)
 
 ##########################
 
