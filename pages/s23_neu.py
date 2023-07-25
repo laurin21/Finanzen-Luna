@@ -61,7 +61,12 @@ df_days['Betrag_df2'].fillna(0, inplace=True)
 df_days['Betrag'] = df_days['Betrag_df1'] + df_days['Betrag_df2']
 df_days.drop(columns=['Betrag_df1', 'Betrag_df2'], inplace=True)
 
-df = pd.DataFrame()
+df = df_feed.copy
+st.write(df)
+for index in range(len(df_split)):
+    for day in days_list:
+        df.loc[len(day)+index] = {""}
+
 
 df_budget = pd.DataFrame()
 
