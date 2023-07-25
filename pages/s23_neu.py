@@ -67,7 +67,6 @@ for index in range(len(df_split)):
     amount_per_day = df_split.loc[index]["Betrag"] / days
     daily_expenses = pd.DataFrame({'Datum': days_list, 'Beschreibung': df_split.loc[index]["Beschreibung"] + " (splitted)", 'Kategorie': df_split.loc[index]["Kategorie"], 'Betrag': amount_per_day})
     df = pd.concat([df, daily_expenses], ignore_index=True)
-    df = df.sort_values(by='Datum').reset_index(drop=True)
 
 st.write(df)
 
