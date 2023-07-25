@@ -65,7 +65,7 @@ df = df_feed.copy()
 st.write(df)
 for index in range(len(df_split)):
     for day in days_list:
-        df.loc[len(day)+index] = {""}
+        df.loc[len(day)+index] = {"Datum":df_split[index]["Datum"], "Beschreibung":df_split[index]["Beschreibung"], "Kategorie":df_split[index]["Kategorie"], "Betrag":df_split[index]["Betrag"] }
 
 
 df_budget = pd.DataFrame()
