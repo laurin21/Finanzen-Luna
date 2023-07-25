@@ -47,10 +47,13 @@ df_split = df_feed[df_feed["Split"] == 1]
 splitted = round(float(df_split["Betrag"].sum()) / days, 2)
 splitted_per_day = [splitted]*days
 
+df_no_split = df_feed[df_feed["Split"] != 1]
+st.write(df_no_split)
+
 df_days = pd.DataFrame([days_list, splitted_per_day])
 df_days = df_days.T
-for day in df_days[0]:
-    st.write(type(day))
+for day in df_no_split[0]:
+    st.write()
 
 df = pd.DataFrame()
 
