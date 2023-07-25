@@ -62,7 +62,9 @@ st.write(sum_dates)
 df_days = pd.DataFrame([days_list, splitted_per_day])
 df_days = df_days.T
 
-
+st.write("NO SPLIT:")
+st.write(df_days)
+st.write("END")
 
 df = pd.DataFrame()
 
