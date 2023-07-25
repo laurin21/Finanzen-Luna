@@ -50,12 +50,14 @@ splitted_per_day = [splitted]*days
 df_no_split = df_feed[df_feed["Split"] != 1]
 st.write(df_no_split)
 df_no_split['Datum'] = df_no_split['Datum'].apply(lambda dt: dt.strftime('%d.%m.%Y'))
+sum_dates = pd.DataFrame(df_no_split.groupby("Datum")["Betrag"].sum())
 
+st.write(sum_dates)
 
 df_days = pd.DataFrame([days_list, splitted_per_day])
 df_days = df_days.T
-for day in df_no_split["Datum"]:
-    st.write(day)
+
+
 
 df = pd.DataFrame()
 
