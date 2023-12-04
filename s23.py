@@ -29,6 +29,11 @@ sheet_url = st.secrets["private_gsheets_url"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 ##########################
+
+existing_data = conn.read(worksheet="Buecher", usecols=list(range(6)), ttl=5)
+
+
+
 days = 31
 total_budget = 3000
 daily_budget = round(total_budget / days, 2)
