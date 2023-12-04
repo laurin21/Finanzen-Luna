@@ -2,7 +2,7 @@
 
 import streamlit as st
 from google.oauth2 import service_account
-import gsheetsdb
+from gsheetsdb import connect
 import pandas as pd
 import datetime as dt
 
@@ -15,7 +15,7 @@ credentials = service_account.Credentials.from_service_account_info(
         "https://www.googleapis.com/auth/spreadsheets",
     ],
 )
-conn = gsheetsdb.connect(credentials=credentials)
+conn = connect(credentials=credentials)
 
 # Perform SQL query on the Google Sheet.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
@@ -29,11 +29,6 @@ sheet_url = st.secrets["private_gsheets_url"]
 rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
 ##########################
-
-existing_data = conn.read(worksheet="Buecher", usecols=list(range(6)), ttl=5)
-
-
-
 days = 31
 total_budget = 3000
 daily_budget = round(total_budget / days, 2)
