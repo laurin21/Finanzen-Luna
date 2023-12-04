@@ -2,7 +2,7 @@
 
 import streamlit as st
 from google.oauth2 import service_account
-from gsheetsdb
+import gsheetsdb
 import pandas as pd
 import datetime as dt
 
